@@ -53,7 +53,7 @@ From your command line:
 ### Install API In progress.. :construction:
 ```bash
 # Clone this repository
-$ git clone https://github.com/DanielObara/NLW-1.0
+$ git clone https://github.com/IsaqueIgor/Ecoleta
 
 # Go into the repository
 $ cd NLW-1.0/backend

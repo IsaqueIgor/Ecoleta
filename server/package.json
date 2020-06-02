@@ -4,14 +4,15 @@
   "description": "",
   "main": "index",
   "scripts": {
-    "start": "npx ts-node-dev src/server.ts",
-    "knex:migrate": "knex migrate:latest --knexfile knexfile.ts migrate:latest",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
+    "knex:seed": "knex --knexfile knexfile.ts seed:run",
+    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
   },
   "keywords": [],
   "author": "Isaque Igor (https://www.linkedin.com/in/isaqueigor/)",
   "license": "ISC",
   "dependencies": {
+    "babel-preset-env": "^1.7.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "knex": "^0.21.1",

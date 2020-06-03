@@ -16,6 +16,28 @@ const CreatePoint = () => {
                     Back to Home
                 </Link>
             </header>
+
+            <form>
+                <h1>Collection Point<br/> Registration</h1>
+
+                <fieldset>
+                    <legend>
+                        <h2>Information</h2>
+                    </legend>
+                </fieldset>
+
+                <fieldset>
+                    <legend>
+                        <h2>Adress</h2>
+                    </legend>
+                </fieldset>
+
+                <fieldset>
+                    <legend>
+                        <h2>Items</h2>
+                    </legend>
+                </fieldset>
+            </form>
         </div>
     );
 }

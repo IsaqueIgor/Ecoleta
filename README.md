@@ -10,13 +10,12 @@
     <img alt="Made by IsaqueIgor" src="https://img.shields.io/badge/made%20by-IsaqueIgor-%2304D361">
   </a>
 
-  <a href="https://github.com/DanielObara/NLW-1.0/commits/master">
+  <a href="https://github.com/IsaqueIgor/Ecoleta/commits/master">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/IsaqueIgor/Ecoleta">
   </a>
 </p>
 
 <p align="center">
-  <a href="#-nlw">Next Level Week</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-Technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;

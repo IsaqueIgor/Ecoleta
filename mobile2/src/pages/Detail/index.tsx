@@ -1,16 +1,58 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {Feather as Icon, FontAwesome} from '@expo/vector-icons';
+import {View, StyleSheet, TouchableOpacity, Text, Image} from 'react-native';
+import Constansts from 'expo-constants'
+import { useNavigation } from '@react-navigation/native';
+import { RectButton } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Detail = () => {
+  const navigation = useNavigation();
 
+  function handleNavigateBack(){
+    navigation.goBack();
+  }
+
+  return(
+    <SafeAreaView style={{ flex: 1}}>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={handleNavigateBack}>
+          <Icon name="arrow-left" size={20} color="#34cb70" />
+        </TouchableOpacity>
+
+        <Image style={styles.pointImage} source={{}}/>
+        
+        <Text style={styles.pointName}></Text>
+        <Text style={styles.pointItems}></Text>
+
+        <View style={styles.address}>
+          <Text style={styles.addressTitle}></Text>
+          <Text style={styles.addressContent}></Text>
+        </View>
+      </View>
+      <View style={styles.footer}>
+        <RectButton style={styles.button} onPress={()=>{}}>
+          <FontAwesome name="whatsapp" size={20} color="#FFF"/>
+          <Text style={styles.buttonText}>Whatsapp</Text>
+        </RectButton>
+
+        <RectButton style={styles.button} onPress={()=>{}}>
+          <Icon name="mail" size={20} color="#FFF"/>
+          <Text style={styles.buttonText}>E-Mail</Text>
+        </RectButton>
+
+      </View>
+    </SafeAreaView>
+  )
 }
+
 export default Detail;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 32,
-    paddingTop: 20,
+    paddingTop: 20 + Constansts.statusBarHeight,
   },
 
   pointImage: {
@@ -57,6 +99,7 @@ const styles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     borderColor: '#999',
     paddingVertical: 20,
+    paddingBottom: 16,
     paddingHorizontal: 32,
     flexDirection: 'row',
     justifyContent: 'space-between'

@@ -1,18 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Feather as Icon} from '@expo/vector-icons';
-import {View, ImageBackground, StyleSheet, Image, Text} from 'react-native';
+import {View, ImageBackground, StyleSheet, Image, KeyboardAvoidingView ,Text, Platform} from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation} from '@react-navigation/native';
+import { Picker } from '@react-native-community/picker';
+import axios from 'axios';
 
+interface IBGEUFResponse {
+  sigla: string;
+}
+
+interface IBGECityResponse {
+  nome: string;
+}
 
 const Home = () => {
+  const [ufs, setUfs] = useState<string[]>([]);
+  const [cities, setCities] = useState<string[]>([]);
+
+  const [selectedUf, setSelectedUf] = useState<React.ReactText>('0');
+  const [selectedCity, setSelectedCity] = useState<React.ReactText>('0');
+
   const navigation = useNavigation();
 
-  function handleNavigateToPoints(){
-    navigation.navigate('Points')
-  }
+  useEffect(() => {
+    axios.get<IBGEUFResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados').then(({ data }) => {
+      const ufInitials = data.map(uf => uf.sigla);
+      setUfs(ufInitials);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (selectedUf === '0') {
+      return;
+    }
+
+    axios.get<IBGECityResponse[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`).then(({ data }) => {
+      const cityNames = data.map(city => city.nome);
+      setCities(cityNames);
+    });
+  }, [selectedUf]);
+
+  const handleNavigateToPoints = useCallback(() => {
+    navigation.navigate('Points', {
+      uf: selectedUf,
+      city: selectedCity
+    });
+  }, [selectedUf, selectedCity]);
 
   return (
+    <KeyboardAvoidingView style={{ flex: 1}} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ImageBackground  
           source={require('../../../assets/home-background.png')} 
           style={styles.container}
@@ -22,11 +59,37 @@ const Home = () => {
           >
           <View style={styles.main}>
               <Image source={require('../../../assets/logo.png')} />
+              <View>
               <Text style={styles.title}>Your waste collection marketplace</Text>
               <Text style={styles.description}>Helping people find waste collection points efficiently</Text>
+              </View>
           </View>
 
           <View style={styles.footer}>
+              <Picker
+                selectedValue={selectedUf}
+                style={styles.input}
+                onValueChange={(value) => setSelectedUf(value)}
+              >
+                <Picker.Item label="Select the State" value="0" />
+
+                {ufs.map(item => (
+                  <Picker.Item key={item} label={item} value={item} />
+                ))}
+              </Picker>
+
+              <Picker
+                selectedValue={selectedCity}
+                style={styles.input}
+                onValueChange={(value) => setSelectedCity(value)}
+              >
+                <Picker.Item label="Select the City" value="0" />
+
+                {cities.map(item => (
+                  <Picker.Item key={item} label={item} value={item} />
+                ))}
+              </Picker>
+
               <RectButton style={styles.button} onPress={handleNavigateToPoints}>
                   <View style={styles.buttonIcon}>
                       <Text> <Icon name="arrow-right" color="#FFF" size={28}/> </Text>
@@ -35,6 +98,7 @@ const Home = () => {
               </RectButton>
           </View>
       </ImageBackground>
+      </KeyboardAvoidingView>
   )
 }
 

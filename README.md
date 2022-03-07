@@ -82,7 +82,7 @@ After merging your receipt request to done, you can delete a branch from yours.
 
 This project is under the MIT license. See the [LICENSE](LICENSE.md) for details.
 
-Made with ♥ by Isaque Igor :wave: [Get in touch!](https://www.linkedin.com/in/isaqueigor/)
+Made with ♥ by @isaqueigor :wave: [Get in touch!](https://www.linkedin.com/in/isaqueigor/)
 
 [nodejs]: https://nodejs.org/
 [typescript]: https://www.typescriptlang.org/
